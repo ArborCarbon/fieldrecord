@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "fieldrecord"
+version = "0.1.0"
+description = ""
+authors = ["cb-arborcarbon <c.barritt@arborcarbon.com.au>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

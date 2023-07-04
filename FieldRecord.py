@@ -12,7 +12,7 @@ from src.utils import read_files, set_crs, save_updated_crs_files, remove_nulls,
 
 
 # --- Inputs
-# File paths
+# File paths 
 plantation_path = 'data/inputs/223411/HVP_Plantation_23.shp'
 polygon_path = 'data/inputs/223411/area.shp'
 point_path = 'data/inputs/223411/mpoint.shp'
