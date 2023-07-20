@@ -10,6 +10,8 @@ python = "^3.11"
 geopandas = "^0.13.0"
 pandas = "^2.0.2"
 shapely = "^2.0.1"
+typer = "^0.9.0"
+matplotlib = "^3.7.2"
 
 
 

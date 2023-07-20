@@ -54,6 +54,23 @@ Description: Functions for setup of script (reading, setting crs, etc), and othe
 ## Installation Instructions   
 Coming soon...
 
+
+## Usage Instructions
+
+## Debugging / issues
+The point + polygon data coming from Davids old software is not very clean. There are some issues which may arrise over time. known issues:
+loading polygon layers returns:
+`ValueError: A linearring requires at least 4 coordinates`
+This error can be fixed by first loading the data in QGIS and saving it as a new layer. use functions:
+    1. check validity
+    2. fix geometries
+
+The data are non-georeferenced. I think they will be in 4326. or the CRS matching the plantation layer....
+this will cause some errors be aware of this. save a new copy with the correct CRS if are having trouble to rule this out. 
+
+
+
+
 ## Style Guide
 Basic [PEP-8](https://www.python.org/dev/peps/pep-0008/)
 * CamelCase for classes  

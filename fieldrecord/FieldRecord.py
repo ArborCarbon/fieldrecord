@@ -13,19 +13,22 @@ from src.utils import read_files, set_crs, save_updated_crs_files, remove_nulls,
 
 # --- Inputs
 # File paths 
-plantation_path = 'data/inputs/223411/HVP_Plantation_23.shp'
-polygon_path = 'data/inputs/223411/area.shp'
-point_path = 'data/inputs/223411/mpoint.shp'
+plantation_path = Path('/Users/harryeslick/ArborCarbon Dropbox/Consulting/ACTForests/2023/NSA2023/NSA2023.shp')
+polygon_path = Path('/Users/harryeslick/ArborCarbon Dropbox/Consulting/ACTForests/2023/070223/164436/area_valid.fgb')
+point_path = Path('/Users/harryeslick/ArborCarbon Dropbox/Consulting/ACTForests/2023/070223/164436/mpoint.shp')
+
+# gdf = gpd.read_file(polygon_path)
 
 # Set crs, and read data from files
-crs = 3111
+crs = 4326
 
 
 # --- Outputs
 # Create output directory if it does not exist
 save_suffix = timestamp()
-out_dir = Path(f'data/outputs/outputs_{save_suffix}')
+out_dir = Path(f'/Users/harryeslick/ArborCarbon Dropbox/Consulting/ACTForests/2023/fieldrecord2')
 out_dir.mkdir(exist_ok=True, parents=True)
+output_filename = f'{plantation_path.stem}_{save_suffix}.gpkg'
 
 
 
@@ -134,7 +137,6 @@ def main():
     # drop cols
     df.drop(columns=['CODE_dict'], inplace=True)
     # Save the processed dataframe to a file
-    output_filename = f'HVPPlantations_inclNE_{save_suffix}.gpkg'
     df.to_file(out_dir / output_filename)
     return df
 

@@ -14,9 +14,13 @@ def set_crs(plantations, point_obs, polygon_obs, crs):
 
     # Set CRS and reproject data
     plantations_crs = plantations.crs
-    plantations = plantations.to_crs(crs)
-    point_obs = point_obs.to_crs(crs)
-    polygon_obs = polygon_obs.to_crs(crs)
+    # plantations = plantations.to_crs(crs)
+    if point_obs.crs is None:
+        point_obs.crs = crs
+    if polygon_obs.crs is None:
+        polygon_obs.crs = crs
+    point_obs = point_obs.to_crs(plantations_crs)
+    polygon_obs = polygon_obs.to_crs(plantations_crs)
     return plantations, point_obs, polygon_obs
 
 def save_updated_crs_files(plantations, point_obs, polygon_obs, out_dir):
