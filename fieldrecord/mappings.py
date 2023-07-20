@@ -47,5 +47,5 @@ pests = [
 PEST_MAP = {x: x for x in pests}
 
 # List of column names to be processed
-columns_to_process = {'Sirex_Impact_2023': 'SN', 'Dothi_Impact_2023': 'DB', 'Abiotic_2023': ABIOTIC_MAP, 'Pest_Detected_2023': PEST_MAP}
+columns_to_process = {'Sirex2023': 'SN', 'Dothi2023': 'DB', 'Abiotic2023': ABIOTIC_MAP, 'PestD_2023': PEST_MAP}
 
