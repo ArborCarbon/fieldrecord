@@ -52,10 +52,27 @@ Description: Functions for setup of script (reading, setting crs, etc), and othe
 ""   
 
 ## Installation Instructions   
-Coming soon...
-
+create python environment in conda    
+`conda create -n fieldrecord python=3.11`   
+activate environment   
+`conda activate fieldrecord`   
+install dependencies   
+`pip install git+https://github.com/ArborCarbon/fieldrecord.git --force-reinstall`   
 
 ## Usage Instructions
+### run using the CLI
+after installing the package you can run the script using the CLI.   
+in the terminal type:   
+`fieldrecord --help` to get further instructions      
+it should look like this:   
+![terminal help menu screenshot](image.png)   
+
+enter the required arguments and the script will run. eg
+`fieldrecord <path/to/plantations/layer> <path/to/observation/polygons> <path/to/observation/points> <path/to/output/folder>`
+
+
+
+
 
 ## Debugging / issues
 The point + polygon data coming from Davids old software is not very clean. There are some issues which may arrise over time. known issues:
