@@ -4,11 +4,11 @@ import geopandas as gpd
 import pandas as pd
 from pathlib import Path
 
-from src.decode import decode
-from src.formatting import format_codes, put_codes_in_columns
-from src.process_points import intersect_point_data_with_plantations, join_point_data_to_polygons
-from src.process_polygons import intersect_polygon_data_with_plantations, clean_polygons
-from src.utils import read_files, set_crs, save_updated_crs_files, remove_nulls, add_nulls, timestamp
+from fieldrecord.src.decode import decode
+from fieldrecord.src.formatting import format_codes, put_codes_in_columns, sort_output_columns
+from fieldrecord.src.process_points import intersect_point_data_with_plantations, join_point_data_to_polygons
+from fieldrecord.src.process_polygons import intersect_polygon_data_with_plantations, clean_polygons
+from fieldrecord.src.utils import read_files, set_crs, save_updated_crs_files, remove_nulls, add_nulls, timestamp
 
 
 # --- Inputs
@@ -26,7 +26,7 @@ crs = 4326
 # --- Outputs
 # Create output directory if it does not exist
 save_suffix = timestamp()
-out_dir = Path(f'/Users/harryeslick/ArborCarbon Dropbox/Consulting/ACTForests/2023/fieldrecord2')
+out_dir = Path(f'/Users/harryeslick/ArborCarbon Dropbox/Consulting/ACTForests/2023/fieldrecord3')
 out_dir.mkdir(exist_ok=True, parents=True)
 output_filename = f'{plantation_path.stem}_{save_suffix}.gpkg'
 
@@ -99,6 +99,7 @@ def main():
     # --- setup
     # Read files
     plantations, point_obs, polygon_obs = read_files(plantation_path, polygon_path, point_path)
+    input_cols = plantations.columns.tolist()
     # Set crs'
     plantations, point_obs, polygon_obs = set_crs(plantations, point_obs, polygon_obs, crs)
     save_updated_crs_files(plantations, point_obs, polygon_obs, out_dir)
@@ -131,11 +132,14 @@ def main():
 
     # add empty CODEs back in
     df = add_nulls(df, nulls)
-    
+    print('x')
 
     # --- Save outputs
     # drop cols
-    df.drop(columns=['CODE_dict'], inplace=True)
+
+    
+    df = sort_output_columns(df, input_cols, columns_to_process)
+    
     # Save the processed dataframe to a file
     df.to_file(out_dir / output_filename)
     return df

@@ -25,10 +25,10 @@ Inputs:
 - input vector layers listed above.
 - set project crs
 
-src.decode.py:   
+fieldrecord.src.decode.py:   
 Description: Takes CODEs in original format 'DB_Low_Med_' and converts to dictionary {'DB': ['Low', 'Med']}
 
-src.formatting.py:   
+fieldrecord.src.formatting.py:   
 Description: 
 - Converts dictionary format to final dataframe format. 
 - DB & SN gets their own column. 
@@ -37,13 +37,13 @@ Description:
 - severities for DB & SN go into the DB & SN columns.
 - all other severities go into the severity column.
 
-src.process_points.py:   
+fieldrecord.src.process_points.py:   
 Description: Intersects the hand drawn points layer with plantations layer. Also has the polygon/points merging function.
 
-src.process_polygons.py:   
+fieldrecord.src.process_polygons.py:   
 Description: Intersects the hand drawn polygons layer with the plantations layer.
 
-src.utils.py:   
+fieldrecord.src.utils.py:   
 Description: Functions for setup of script (reading, setting crs, etc), and other misc. functions.
 
 
