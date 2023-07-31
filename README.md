@@ -25,6 +25,9 @@ Inputs:
 - input vector layers listed above.
 - set project crs
 
+Config.    
+column names and pest codes are hard coded in the mappings.py file. this can be edited pretty easily.   
+
 fieldrecord.src.decode.py:   
 Description: Takes CODEs in original format 'DB_Low_Med_' and converts to dictionary {'DB': ['Low', 'Med']}
 
