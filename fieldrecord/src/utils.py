@@ -10,13 +10,19 @@ def read_files(plantation_path, polygon_path, point_path):
     polygon_obs = gpd.read_file(polygon_path)
     return plantations, point_obs, polygon_obs
 
-def set_crs(plantations, point_obs, polygon_obs, crs):
-
-    # Set CRS and reproject data
-    plantations_crs = plantations.crs
-    plantations = plantations.to_crs(crs)
-    point_obs = point_obs.to_crs(crs)
-    polygon_obs = polygon_obs.to_crs(crs)
+def set_crs(plantations, point_obs, polygon_obs,output_crs, crs=4326):
+    if output_crs == 0:
+        output_crs = plantations.crs
+    else :
+        plantations=plantations.to_crs(output_crs)
+    
+    # plantations = plantations.to_crs(crs)
+    if point_obs.crs is None:
+        point_obs.crs = crs
+    if polygon_obs.crs is None:
+        polygon_obs.crs = crs
+    point_obs = point_obs.to_crs(output_crs)
+    polygon_obs = polygon_obs.to_crs(output_crs)
     return plantations, point_obs, polygon_obs
 
 def save_updated_crs_files(plantations, point_obs, polygon_obs, out_dir):

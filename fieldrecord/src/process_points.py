@@ -9,12 +9,13 @@ def intersect_point_data_with_plantations(point_obs, plantations):
 
     # fillna in CODE column
     # point_obs['CODE'] = point_obs['CODE'].fillna('NOCODE_')
-    point_obs = point_obs[~point_obs['CODE'].isna()]
+    point_obs.dropna(inplace=True)
+    # point_obs = point_obs[~point_obs['CODE'].isna()]
 
     def decode_points(x, code_column='CODE'):
         x[code_column] = x[code_column].strip()
         split = x[code_column].split('_')[:-1]
-        x['CODE_dict'] = {split[0]: ["Trace"]}
+        x['CODE_dict'] = {code: ["Trace"] for code in split}
         return x
 
     point_obs = point_obs.apply(lambda x: decode_points(x), axis=1)

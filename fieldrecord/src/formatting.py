@@ -88,3 +88,9 @@ def put_codes_in_columns(df, columns_to_process, SEVERITY_RANK):
 
     return df
         
+        
+        
+def sort_output_columns(df, input_cols, columns_to_process):
+    cols_to_keep =  input_cols + list(columns_to_process.keys()) + ['CODE', 'p_area','Severity','obs_idx' ]
+    df = df[cols_to_keep]
+    return df

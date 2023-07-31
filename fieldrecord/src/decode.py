@@ -34,6 +34,7 @@ def decode(gdf, SEVERITY_MAP: dict, code_column='CODE', empty_value='None'):
         return result        
 
     def build_decode_list(code, split, severity_map):
+        """identifies which codes are severity codes and which are not."""
         decode = ['other' if x not in severity_map else 'severity' for x in split]
         return decode
 
@@ -73,6 +74,7 @@ def decode(gdf, SEVERITY_MAP: dict, code_column='CODE', empty_value='None'):
 
     gdf = apply_maps(gdf, SEVERITY_MAP, code_column=code_column, empty_value=empty_value)
   
+    #TODO: CODE-'miss'and Miss Do not have a severity value, and are dropped here. 
     gdf = pd.concat([gdf, nulls])
     return gdf
 

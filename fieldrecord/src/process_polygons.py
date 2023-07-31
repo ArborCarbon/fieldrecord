@@ -28,7 +28,7 @@ def preprocess_geodataframes(plantations, polygon_obs, observation_attributes, c
     plantations['p_area'] = plantations.area
 
     observation_attributes.extend(['geometry'])
-    polygon_obs = polygon_obs[observation_attributes]
+    # polygon_obs = polygon_obs[observation_attributes]
     polygon_obs['obs_idx'] = list(polygon_obs.reset_index()['index'])
 
     return plantations, polygon_obs
@@ -146,5 +146,7 @@ def clean_polygons(gdf: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
     gdf = gdf.copy()
     gdf = gdf[gdf['geometry'] != 'None']
     gdf = gdf[gdf['geometry'].is_valid]
-    gdf.drop_duplicates(subset=['obs_idx', 'GlobalID'], keep='last', inplace=True)
-    return gdf
+    gdf.reset_index(inplace=True)
+    #TODO: why are there duplicates? should these be sorted by severity to keep most severe?
+    gdf.drop_duplicates(subset=['obs_idx', 'index'], keep='last', inplace=True)
+    return gdf.drop(columns=['index'])
