@@ -1,306 +1,0 @@
-Output Path:	C:\Geolink\Projects\HVP\2020\Translte\050623\223411\
-Output Type:	ArcView Shapefile
-Datum:		Australian GDA94
-Projection:	Geodetic/World
-Units:		Degrees - Dec.
-  
-Recalculation of sketched features: OFF
-  
-------------------------------------------------------------------------------------------------------------------------
-
-Input file:	C:\Geolink\Projects\HVP\2020\Log\Gipps2023\075608.DAT
-All features were processed successfully.
-------------------------------------------------------------------------------------------------------------------------
-Time (GMT) of first GPS position:	5/04/2023 21:57:05
-Time (GMT) of last GPS position:	5/05/2023  0:27:31
-GPS positions processed:		9022
-Minimum Longitude:			  145.945878
-Minimum Latitude:			  -38.401489
-Maximum Longitude:			  146.473198
-Maximum Latitude:			  -37.789727
-Line features collected:		0
-Line features processed:		0
-Point features collected:		0
-Point features processed:		0
-Sketch point features collected:	0
-Sketch point features processed:	0
-Sketch multi-point features collected:	41
-Sketch multi-point features processed:	41
-Sketch line features collected:		0
-Sketch line features processed:		0
-Sketch polygon features collected:	94
-Sketch polygon features processed:	106
-XDS records collected:			0
-XDS records processed:			0
-
-------------------------------------------------------------------------------------------------------------------------
-
-Input file:	C:\Geolink\Projects\HVP\2020\Log\Gipps2023\082351.DAT
-All features were processed successfully.
-------------------------------------------------------------------------------------------------------------------------
-Time (GMT) of first GPS position:	5/03/2023 22:37:39
-Time (GMT) of last GPS position:	5/03/2023 22:51:45
-GPS positions processed:		847
-Minimum Longitude:			  146.407460
-Minimum Latitude:			  -38.285304
-Maximum Longitude:			  146.407475
-Maximum Latitude:			  -38.285285
-Line features collected:		0
-Line features processed:		0
-Point features collected:		0
-Point features processed:		0
-Sketch point features collected:	0
-Sketch point features processed:	0
-Sketch multi-point features collected:	0
-Sketch multi-point features processed:	0
-Sketch line features collected:		0
-Sketch line features processed:		0
-Sketch polygon features collected:	1
-Sketch polygon features processed:	1
-XDS records collected:			0
-XDS records processed:			0
-
-------------------------------------------------------------------------------------------------------------------------
-
-Input file:	C:\Geolink\Projects\HVP\2020\Log\Gipps2023\085310.DAT
-All features were processed successfully.
-------------------------------------------------------------------------------------------------------------------------
-Time (GMT) of first GPS position:	5/03/2023 22:53:15
-Time (GMT) of last GPS position:	5/03/2023 23:08:25
-GPS positions processed:		912
-Minimum Longitude:			  146.407474
-Minimum Latitude:			  -38.301720
-Maximum Longitude:			  146.418846
-Maximum Latitude:			  -38.285228
-Line features collected:		0
-Line features processed:		0
-Point features collected:		0
-Point features processed:		0
-Sketch point features collected:	0
-Sketch point features processed:	0
-Sketch multi-point features collected:	0
-Sketch multi-point features processed:	0
-Sketch line features collected:		0
-Sketch line features processed:		0
-Sketch polygon features collected:	0
-Sketch polygon features processed:	0
-XDS records collected:			0
-XDS records processed:			0
-
-------------------------------------------------------------------------------------------------------------------------
-
-Input file:	C:\Geolink\Projects\HVP\2020\Log\Gipps2023\100906.DAT
-All features were processed successfully.
-------------------------------------------------------------------------------------------------------------------------
-Time (GMT) of first GPS position:	0/00/0  0:00:00
-Time (GMT) of last GPS position:	0/00/0  0:00:00
-GPS positions processed:		0
-Minimum Longitude:			    0.000000
-Minimum Latitude:			    0.000000
-Maximum Longitude:			    0.000000
-Maximum Latitude:			    0.000000
-Line features collected:		0
-Line features processed:		0
-Point features collected:		0
-Point features processed:		0
-Sketch point features collected:	0
-Sketch point features processed:	0
-Sketch multi-point features collected:	0
-Sketch multi-point features processed:	0
-Sketch line features collected:		0
-Sketch line features processed:		0
-Sketch polygon features collected:	0
-Sketch polygon features processed:	0
-XDS records collected:			0
-XDS records processed:			0
-
-------------------------------------------------------------------------------------------------------------------------
-
-Input file:	C:\Geolink\Projects\HVP\2020\Log\Gipps2023\103838.DAT
-All features were processed successfully.
-------------------------------------------------------------------------------------------------------------------------
-Time (GMT) of first GPS position:	0/00/0  0:00:00
-Time (GMT) of last GPS position:	0/00/0  0:00:00
-GPS positions processed:		0
-Minimum Longitude:			    0.000000
-Minimum Latitude:			    0.000000
-Maximum Longitude:			    0.000000
-Maximum Latitude:			    0.000000
-Line features collected:		0
-Line features processed:		0
-Point features collected:		0
-Point features processed:		0
-Sketch point features collected:	0
-Sketch point features processed:	0
-Sketch multi-point features collected:	0
-Sketch multi-point features processed:	0
-Sketch line features collected:		0
-Sketch line features processed:		0
-Sketch polygon features collected:	1
-Sketch polygon features processed:	0
-XDS records collected:			0
-XDS records processed:			0
-
-------------------------------------------------------------------------------------------------------------------------
-
-Input file:	C:\Geolink\Projects\HVP\2020\Log\Gipps2023\105854.DAT
-All features were processed successfully.
-------------------------------------------------------------------------------------------------------------------------
-Time (GMT) of first GPS position:	5/05/2023  0:59:01
-Time (GMT) of last GPS position:	5/05/2023  2:58:39
-GPS positions processed:		7167
-Minimum Longitude:			  146.197766
-Minimum Latitude:			  -38.617217
-Maximum Longitude:			  146.838353
-Maximum Latitude:			  -38.206739
-Line features collected:		0
-Line features processed:		0
-Point features collected:		0
-Point features processed:		0
-Sketch point features collected:	0
-Sketch point features processed:	0
-Sketch multi-point features collected:	14
-Sketch multi-point features processed:	14
-Sketch line features collected:		0
-Sketch line features processed:		0
-Sketch polygon features collected:	49
-Sketch polygon features processed:	51
-XDS records collected:			0
-XDS records processed:			0
-
-------------------------------------------------------------------------------------------------------------------------
-
-Input file:	C:\Geolink\Projects\HVP\2020\Log\Gipps2023\110408.DAT
-All features were processed successfully.
-------------------------------------------------------------------------------------------------------------------------
-Time (GMT) of first GPS position:	5/04/2023  1:04:18
-Time (GMT) of last GPS position:	5/04/2023  2:59:05
-GPS positions processed:		6876
-Minimum Longitude:			  146.409359
-Minimum Latitude:			  -38.212826
-Maximum Longitude:			  147.313869
-Maximum Latitude:			  -37.718073
-Line features collected:		0
-Line features processed:		0
-Point features collected:		0
-Point features processed:		0
-Sketch point features collected:	0
-Sketch point features processed:	0
-Sketch multi-point features collected:	18
-Sketch multi-point features processed:	18
-Sketch line features collected:		0
-Sketch line features processed:		0
-Sketch polygon features collected:	128
-Sketch polygon features processed:	140
-XDS records collected:			0
-XDS records processed:			0
-
-------------------------------------------------------------------------------------------------------------------------
-
-Input file:	C:\Geolink\Projects\HVP\2020\Log\Gipps2023\125904.DAT
-All features were processed successfully.
-------------------------------------------------------------------------------------------------------------------------
-Time (GMT) of first GPS position:	5/04/2023  2:59:14
-Time (GMT) of last GPS position:	5/04/2023  3:02:08
-GPS positions processed:		175
-Minimum Longitude:			  147.209014
-Minimum Latitude:			  -37.821409
-Maximum Longitude:			  147.244835
-Maximum Latitude:			  -37.801047
-Line features collected:		0
-Line features processed:		0
-Point features collected:		0
-Point features processed:		0
-Sketch point features collected:	0
-Sketch point features processed:	0
-Sketch multi-point features collected:	0
-Sketch multi-point features processed:	0
-Sketch line features collected:		0
-Sketch line features processed:		0
-Sketch polygon features collected:	0
-Sketch polygon features processed:	0
-XDS records collected:			0
-XDS records processed:			0
-
-------------------------------------------------------------------------------------------------------------------------
-
-Input file:	C:\Geolink\Projects\HVP\2020\Log\Gipps2023\132226.DAT
-All features were processed successfully.
-------------------------------------------------------------------------------------------------------------------------
-Time (GMT) of first GPS position:	5/05/2023  3:23:06
-Time (GMT) of last GPS position:	5/05/2023  3:52:24
-GPS positions processed:		1759
-Minimum Longitude:			  146.239982
-Minimum Latitude:			  -38.570851
-Maximum Longitude:			  146.653669
-Maximum Latitude:			  -38.210281
-Line features collected:		0
-Line features processed:		0
-Point features collected:		0
-Point features processed:		0
-Sketch point features collected:	0
-Sketch point features processed:	0
-Sketch multi-point features collected:	0
-Sketch multi-point features processed:	0
-Sketch line features collected:		0
-Sketch line features processed:		0
-Sketch polygon features collected:	8
-Sketch polygon features processed:	10
-XDS records collected:			0
-XDS records processed:			0
-
-------------------------------------------------------------------------------------------------------------------------
-
-Input file:	C:\Geolink\Projects\HVP\2020\Log\Gipps2023\133956.DAT
-All features were processed successfully.
-------------------------------------------------------------------------------------------------------------------------
-Time (GMT) of first GPS position:	5/04/2023  3:40:11
-Time (GMT) of last GPS position:	5/04/2023  6:02:28
-GPS positions processed:		8538
-Minimum Longitude:			  146.472910
-Minimum Latitude:			  -38.392060
-Maximum Longitude:			  147.209296
-Maximum Latitude:			  -37.821078
-Line features collected:		0
-Line features processed:		0
-Point features collected:		0
-Point features processed:		0
-Sketch point features collected:	0
-Sketch point features processed:	0
-Sketch multi-point features collected:	14
-Sketch multi-point features processed:	14
-Sketch line features collected:		0
-Sketch line features processed:		0
-Sketch polygon features collected:	131
-Sketch polygon features processed:	142
-XDS records collected:			0
-XDS records processed:			0
-
-------------------------------------------------------------------------------------------------------------------------
-
-Input file:	C:\Geolink\Projects\HVP\2020\Log\Gipps2023\135223.DAT
-All features were processed successfully.
-------------------------------------------------------------------------------------------------------------------------
-Time (GMT) of first GPS position:	5/05/2023  3:53:01
-Time (GMT) of last GPS position:	5/05/2023  4:16:06
-GPS positions processed:		1373
-Minimum Longitude:			  146.390563
-Minimum Latitude:			  -38.529005
-Maximum Longitude:			  146.704233
-Maximum Latitude:			  -38.205897
-Line features collected:		0
-Line features processed:		0
-Point features collected:		0
-Point features processed:		0
-Sketch point features collected:	0
-Sketch point features processed:	0
-Sketch multi-point features collected:	1
-Sketch multi-point features processed:	1
-Sketch line features collected:		0
-Sketch line features processed:		0
-Sketch polygon features collected:	10
-Sketch polygon features processed:	11
-XDS records collected:			0
-XDS records processed:			0
-
-

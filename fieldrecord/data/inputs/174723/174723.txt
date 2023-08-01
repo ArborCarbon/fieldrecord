@@ -1,36 +1,0 @@
-Output Path:	C:\Geolink\Projects\HVP\2020\Translte\042623\174723\
-Output Type:	ArcView Shapefile
-Datum:		Australian GDA94
-Projection:	Geodetic/World
-Units:		Degrees - Dec.
-  
-Recalculation of sketched features: OFF
-  
-------------------------------------------------------------------------------------------------------------------------
-
-Input file:	C:\Geolink\Projects\HVP\2020\Log\042623\174123.DAT
-All features were processed successfully.
-------------------------------------------------------------------------------------------------------------------------
-Time (GMT) of first GPS position:	4/26/2023  7:41:30
-Time (GMT) of last GPS position:	4/26/2023  7:46:48
-GPS positions processed:		320
-Minimum Longitude:			  145.318591
-Minimum Latitude:			  -38.009176
-Maximum Longitude:			  145.318592
-Maximum Latitude:			  -38.009167
-Line features collected:		0
-Line features processed:		0
-Point features collected:		0
-Point features processed:		0
-Sketch point features collected:	0
-Sketch point features processed:	0
-Sketch multi-point features collected:	3
-Sketch multi-point features processed:	3
-Sketch line features collected:		0
-Sketch line features processed:		0
-Sketch polygon features collected:	17
-Sketch polygon features processed:	17
-XDS records collected:			0
-XDS records processed:			0
-
-
