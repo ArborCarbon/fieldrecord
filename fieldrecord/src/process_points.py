@@ -5,7 +5,7 @@ from shapely.prepared import prep
 
 def intersect_point_data_with_plantations(point_obs, plantations):    
     # ony keep important columns in point data
-    point_obs = point_obs[['CODE', 'geometry']]
+    point_obs = point_obs.loc[:,['CODE', 'geometry']]
 
     # fillna in CODE column
     # point_obs['CODE'] = point_obs['CODE'].fillna('NOCODE_')
@@ -13,9 +13,9 @@ def intersect_point_data_with_plantations(point_obs, plantations):
     # point_obs = point_obs[~point_obs['CODE'].isna()]
 
     def decode_points(x, code_column='CODE'):
-        x[code_column] = x[code_column].strip()
-        split = x[code_column].split('_')[:-1]
-        x['CODE_dict'] = {code: ["Trace"] for code in split}
+        x.loc[code_column] = x.loc[code_column].strip()
+        split = x.loc[code_column].split('_')[:-1]
+        x.loc['CODE_dict'] = {code: ["Trace"] for code in split}
         return x
 
     point_obs = point_obs.apply(lambda x: decode_points(x), axis=1)

@@ -17,6 +17,15 @@ from fieldrecord.src.utils import read_files, set_crs, save_updated_crs_files, r
 from fieldrecord.mappings import ABIOTIC_MAP, PEST_MAP, SEVERITY_MAP, SEVERITY_RANK,pests, PEST_MAP, columns_to_process
 
 import typer
+from rich.logging import RichHandler
+
+FORMAT = "%(message)s"
+logging.basicConfig(
+    level="INFO", format=FORMAT, datefmt="[%X]", handlers=[RichHandler()]
+)
+
+log = logging.getLogger(__name__)
+
 app = typer.Typer(name="FieldRecord")
 
 @app.command("run")
@@ -33,7 +42,7 @@ def run_field_record(
     output_filename = f'{plantation_path.stem}_{save_suffix}.gpkg'
 
     
-    # --- setup
+    logging.info("# --- setup: reading data...")
     # Read files
     plantations, point_obs, polygon_obs = read_files(plantation_path, polygon_path, point_path)
     input_cols = plantations.columns.tolist()
@@ -44,24 +53,24 @@ def run_field_record(
     save_updated_crs_files(plantations, point_obs, polygon_obs, out_dir)
 
 
-    # --- intersect hand drawn polygons
+    logging.info("# --- intersect hand drawn polygons")
     polygon_obs, plantations = intersect_polygon_data_with_plantations(plantations, polygon_obs, list(columns_to_process.keys()))
     polygon_obs = clean_polygons(polygon_obs)
     # decode polygons
     polygon_obs = decode(polygon_obs, SEVERITY_MAP, code_column='CODE')
 
 
-    # --- intersect points
+    logging.info("# --- intersect points")
     point_obs = intersect_point_data_with_plantations(point_obs, plantations)
     # decode points
     point_obs = decode(point_obs, SEVERITY_MAP, code_column='CODE', empty_value='Trace')
 
 
-    # --- Join point data to polygons 
+    logging.info("# --- Join point data to polygons ")
     df = join_point_data_to_polygons(point_obs=point_obs, polygon_obs=polygon_obs, attribute='CODE')
 
 
-    # --- Format CODEs
+    logging.info("# --- Format CODEs")
     # remove empty CODEs for formatting, add back in later
     df, nulls = remove_nulls(df)
 
@@ -73,7 +82,7 @@ def run_field_record(
     df = add_nulls(df, nulls)
     
 
-    # --- Save outputs
+    logging.info("# --- Save outputs")
     # drop cols
     df = sort_output_columns(df, input_cols, columns_to_process)
     # Save the processed dataframe to a file
