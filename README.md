@@ -63,6 +63,12 @@ install dependencies
 `pip install git+https://github.com/ArborCarbon/fieldrecord.git --force-reinstall`   
 
 ## Usage Instructions
+### Davids Install
+* start a WSL(Ubuntu) terminal in VSCode   
+![Alt text](image-1.png)   
+* Start the conda environment `conda activate FR`  
+![Alt text](image-2.png)   
+
 ### run using the CLI
 after installing the package you can run the script using the CLI.   
 in the terminal type:   
