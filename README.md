@@ -97,11 +97,8 @@ this will cause some errors be aware of this. save a new copy with the correct C
 
 
 
-## Style Guide
-Basic [PEP-8](https://www.python.org/dev/peps/pep-0008/)
-* CamelCase for classes  
-* snake_case for functions  
-* Prefer import module; module.func over from module import func; func for clarity on origin of the function  
-* Docstrings in numpy format  
-* Type hints for function definitions  
+## TODO:
+* If drawn polygon intersects less than XX% of the plantation polygon, exclude it as a likely digitization error (just add another column with these removed, for comparison)
+* If multiple drawn polygons intersect a plantation polygon, include them all so Dave can review
+* If no pest code is present, surfacde this so Dave can review
 
