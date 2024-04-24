@@ -35,6 +35,19 @@ SEVERITY_RANK = {
     'High-Severe': 7,
     'Severe': 8, 
     }
+# 2024
+SEVERITY_RANK = {   
+    'Trace': 0,
+    'Trace-Low': 1,
+    'Low': 2,
+    'Low-Moderate': 3,
+    'Low-High': 4,
+    'Moderate': 5,
+    'Moderate-High': 6,
+    'High': 7,
+    'High-Severe': 8,
+    'Severe': 9, 
+    }
 
 # List of short names for pest detection types
 pests = [
@@ -47,5 +60,6 @@ pests = [
 PEST_MAP = {x: x for x in pests}
 
 # List of column names to be processed
-columns_to_process = {'Sirex2023': 'SN', 'Dothi2023': 'DB', 'Abiotic2023': ABIOTIC_MAP, 'PestD_2023': PEST_MAP}
+# columns_to_process = {'Sirex2023': 'SN', 'Dothi2023': 'DB', 'Abiotic2023': ABIOTIC_MAP, 'PestD_2023': PEST_MAP}
+columns_to_process = {'Sirex2024': 'SN', 'Dothi2024': 'DB', 'Abiotic2024': ABIOTIC_MAP, 'PestD_2024': PEST_MAP}
 

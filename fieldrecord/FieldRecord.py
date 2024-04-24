@@ -73,6 +73,19 @@ SEVERITY_RANK = {
     'High-Severe': 7,
     'Severe': 8, 
     }
+# 2024
+SEVERITY_RANK = {   
+    'Trace': 0,
+    'Trace-Low': 1,
+    'Low': 2,
+    'Low-Moderate': 3,
+    'Low-High': 4,
+    'Moderate': 5,
+    'Moderate-High': 6,
+    'High': 7,
+    'High-Severe': 8,
+    'Severe': 9, 
+    }
 
 # List of short names for pest detection types
 pests = [

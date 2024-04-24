@@ -101,4 +101,6 @@ this will cause some errors be aware of this. save a new copy with the correct C
 * If drawn polygon intersects less than XX% of the plantation polygon, exclude it as a likely digitization error (just add another column with these removed, for comparison)
 * If multiple drawn polygons intersect a plantation polygon, include them all so Dave can review
 * If no pest code is present, surfacde this so Dave can review
-
+* NH: make `SEVERITY_RANK` configurable (seems to not be consistent)
+* NH: make `columns_to_process` configurable (at least update column names each year)
+* NH: remove duplication between FieldRecord.py and mappings.py
