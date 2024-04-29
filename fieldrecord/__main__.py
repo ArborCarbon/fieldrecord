@@ -87,6 +87,10 @@ def run_field_record(
     df = sort_output_columns(df, input_cols, columns_to_process)
     # Save the processed dataframe to a file
     df.to_file(out_dir / output_filename)
+
+    # NH: Save as shp too as gpkg sometimes problematic for Dave
+    shp_path = (out_dir / output_filename).with_suffix(".shp")
+    df.to_file(shp_path)
     
 if __name__ == "__main__":
     app()
