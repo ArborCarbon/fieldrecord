@@ -22,7 +22,6 @@ SEVERITY_MAP = {
     'Med': 'Moderate',
     'High': 'High',
     'Severe': 'Severe',
-
 }
 SEVERITY_RANK = {   
     'Trace': 0,

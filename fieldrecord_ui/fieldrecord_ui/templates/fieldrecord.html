@@ -1,0 +1,99 @@
+<html> 
+<head> 
+	<title>Upload the file : GFG</title> 
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<link rel = "stylesheet" type = "text/css" href = "static/style.css">
+	<script src = "static/script.js"></script>
+</head> 
+<body> 
+	{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+			{% for category, message in messages %}
+				<div class="alert alert-{{ category }} alert-dismissible fade show">
+					{{ message }}
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+	<div class="container">
+		<div class="upload">
+			<h1>Fieldrecord</h1>
+			<div class="file-upload form-group">
+				<form action = "/success" method = "POST" enctype="multipart/form-data" onsubmit="loader()"> 
+					<p><span style="color: red;">*</span> indicates a required field.</p>
+					
+					<label for="file">Upload zip file<span style="color: red;">*</span></label><br>
+					<input type="file" name="file" multiple accept=".zip" required aria-required="true"/><br>
+					
+					<label for="plantations-layer">Filename for: Plantation Layer<span style="color: red;">*</span></label>
+					<input type="text" class="form-control" id="plantations-layer" name="plantations-layer" placeholder="layer.shp" required aria-required="true"> 
+
+					<label for="observation-polygons">Filename for: Observation Polygons<span style="color: red;">*</span></label>
+					<input type="text" class="form-control" id="observation-polygons" name="observation-polygons" placeholder="area.shp" required aria-required="true"> 
+
+					<label for="observation-points">Filename for: Observation Points<span style="color: red;">*</span></label>
+					<input type="text" class="form-control" id="observation-points" name="observation-points" placeholder="points.shp" required aria-required="true"> 
+					
+					<label for="abiotic_map">Abiotic map: dictionary mapping short names to full names for abiotic factors</label>
+					<textarea class="form-control" id="abiotic_map" name="abiotic_map" rows="14">{
+	"Lning": "Lightning",
+	"Weed": "Weed",
+	"Storm": "Storm",
+	"FolDis": "FoliageDiscolouration",
+	"ANB": "ANB",
+	"Herb": "Herb",
+	"Miss": "Stocking",
+	"miss": "Stocking",
+	"Fire": "Fire",
+	"WL": "WL",
+	"DRT": "DRT",
+	"MY": "MY"
+}</textarea>
+					<label for="severity_map">Severity map: dictionary mapping short names to full names for pest impact levels</label>
+					<textarea class="form-control " id="severity_map" name="severity_map" rows="7">{
+	"Trace": "Trace",
+	"Low": "Low",
+	"Med": "Moderate",
+	"High": "High",
+	"Severe": "Severe"
+}</textarea>
+					<label for="severity_rank">Severity rank</label>
+					<textarea class="form-control" id="severity_rank" name="severity_rank" rows="12">{
+	"Trace": 0,
+	"Trace-Low": 1,
+	"Low": 2,
+	"Low-Moderate": 3,
+	"Low-High": 4,
+	"Moderate": 5,
+	"Moderate-High": 6,
+	"High": 7,
+	"High-Severe": 8,
+	"Severe": 9
+}</textarea>
+					<label for="pests">Pest detection types</label>
+					<textarea class="form-control" id="pests" name="pests" rows=1>["CNC", "DNB", "DIP", "IPS", "MPA", "PC", "SN", "MLS", "ALS", "DB", "LRP", "AGM", "URBA", "CupM", "SHM", "LeafB"]</textarea>
+					<label for="columns">Columns to process</label>
+					<textarea class="form-control" id="columns" name="columns" rows="6">{
+	"Sirex2024": "SN",
+	"Dothi2024": "DB",
+	"Abiotic2024": "ABIOTIC_MAP",
+	"PestD_2024": "PEST_MAP"
+}</textarea>
+					<input type="submit" value="Upload" class="btn btn-primary"> 
+				</form> 
+			</div>
+		</div>
+		<div class="loading" style="display: none">
+			<h1>Processing...</h1>
+			<div class="loader"></div>
+		</div>
+	</div>
+	
+</body> 
+</html>
