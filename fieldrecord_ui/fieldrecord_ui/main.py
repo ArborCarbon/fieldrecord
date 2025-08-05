@@ -1,6 +1,8 @@
 from distutils.log import debug 
 from fileinput import filename
-from flask import * 
+from flask import *
+from flask import flash, render_template, request, redirect, url_for
+import json 
 import os 
 from zipfile import ZipFile, ZIP_DEFLATED
 from fieldrecord.__main__ import run_field_record
@@ -64,8 +66,7 @@ def success():
         f = request.files['file'] 
         # get the filenames from the form
         plantations_layer = request.form['plantations-layer']
-        observation_polygons = request.form['observation-polygons']
-        observation_points = request.form['observation-points']
+        polygons_points = request.form['polygons-points-layer']
         abiotic_map_str = request.form.get('abiotic_map')
         pests_str = request.form.get('pests')
         severity_map_str = request.form.get('severity_map')
@@ -81,7 +82,7 @@ def success():
         pest_map = {x: x for x in pests}
         
 
-        print(f.filename, plantations_layer, observation_polygons, observation_points)
+        print(f.filename, plantations_layer, polygons_points)
         print("Requested")
         if not f.filename.endswith('.zip'):
             flash('Uploaded file must be a zip file', 'danger')
@@ -95,27 +96,23 @@ def success():
         app.config['FOLDER_NAME'] = folder_name
 
         plantations_path = os.path.join(folder_name, plantations_layer)
-        polygons_path = os.path.join(folder_name, observation_polygons)
-        points_path = os.path.join(folder_name, observation_points)
+        manual_path = os.path.join(folder_name, polygons_points)
 
         with ZipFile(path, 'r') as zObject:
             zObject.extractall(app.config['UPLOAD_FOLDER'])
             print("extracted files: ", zObject.namelist())
             if plantations_path not in zObject.namelist():
-                print(plantations_path)
+                print("Invalid filename: ", plantations_path)
                 flash('Plantations layer filename must match the name of a provided file', 'danger')
                 return redirect(url_for('main'))
-            if polygons_path not in zObject.namelist():
-                flash('Observation polygons filename must match the name of a provided file', 'danger')
-                return redirect(url_for('main'))
-            if points_path not in zObject.namelist():
-                flash('Observation points filename must match the name of a provided file', 'danger')
+            if manual_path not in zObject.namelist():
+                print("Invalid filename: ", polygons_points)
+                flash('Polygons/points filename must match the name of a provided file', 'danger')
                 return redirect(url_for('main'))
             print("Extracted")
 
             plantations_path2 = os.path.join(app.config['UPLOAD_FOLDER'], plantations_path)
-            polygons_path2 = os.path.join(app.config['UPLOAD_FOLDER'], polygons_path)
-            points_path2 = os.path.join(app.config['UPLOAD_FOLDER'], points_path)
+            manual_path2 = os.path.join(app.config['UPLOAD_FOLDER'], manual_path)
 
 
             if not os.path.exists(app.config['OUTPUT_FOLDER']):
@@ -123,19 +120,19 @@ def success():
 
             # output_path = Path("/home/arborcarbon/BigFella/Development/IR/test")
 
-            run_field_record(plantation_path=plantations_path2, polygon_path=polygons_path2, point_path=points_path2, out_dir=app.config['OUTPUT_FOLDER'], abiotic_map=abiotic_map, pest_map=pest_map, severity_map=severity_map, severity_rank=severity_rank, columns_to_process=columns)
+            run_field_record(plantation_path=plantations_path2, manual_path=manual_path2, out_dir=app.config['OUTPUT_FOLDER'], abiotic_map=abiotic_map, pest_map=pest_map, severity_map=severity_map, severity_rank=severity_rank, columns_to_process=columns)
 
         return render_template("download.html", name=f.filename)   
     
+
 @app.route('/download')
 def download():
     # Print the contents of the output folder
     print(os.listdir(app.config['OUTPUT_FOLDER']))
 
-    # zip_path = os.path.join(app.config['FOLDER_NAME'] + '_processed.zip')
     zip_buffer = BytesIO()
 
-    with ZipFile(zip_buffer, 'w',compression=ZIP_DEFLATED, compresslevel=9, allowZip64=True) as zip_file:
+    with ZipFile(zip_buffer, 'w', compression=ZIP_DEFLATED, compresslevel=9, allowZip64=True) as zip_file:
         for root, dirs, files in os.walk(app.config['OUTPUT_FOLDER']):
             for file in files:
                 if file not in ['output.zip', 'point_obs.gpkg', 'plantations.gpkg', 'polygon_obs.gpkg']:
@@ -144,36 +141,14 @@ def download():
 
     zip_buffer.seek(0)
 
-    if zip_buffer.getbuffer().nbytes > 0:
-        print("ZIP file created successfully in memory")  # Add a print statement to indicate successful ZIP file creation
-    else:
-        print("ZIP file creation failed")  # Add a print statement to indicate failed ZIP file creation
+    # Check if the ZIP buffer has content
+    if zip_buffer.getbuffer().nbytes == 0:
+        flash("Failed to create ZIP file", "danger")
+        return redirect(url_for('main'))
 
-    # Print the contents of the output.zip 
-    # if os.path.exists(zip_path):
-    #     print("ZIP file created successfully")  # Add a print statement to indicate successful ZIP file creation
-    # else:
-    #     print("ZIP file creation failed")  # Add a print statement to indicate failed ZIP file creation
+    download_name = f"{app.config['FOLDER_NAME']}_processed.zip"
 
-    print(os.listdir(app.config['OUTPUT_FOLDER']))
-    # Send the zipped file as a response
-
-    # @after_this_request
-    # def remove_output_folder(response):
-    #     time.sleep(120)
-    #     try:
-    #         shutil.rmtree(app.config['OUTPUT_FOLDER'])
-    #         print("Output folder deleted")
-    #     except Exception as e:
-    #         print(f"Error deleting output folder: {e}")
-    #     return response
-    if app.config['FOLDER_NAME'] == 'output.zip':
-        download_name = app.config['FOLDER_NAME']
-    else:
-        download_name = app.config['FOLDER_NAME'] + '_processed.zip'
-    
-
-    return send_file(zip_buffer, as_attachment=True, download_name=download_name)
+    return send_file(zip_buffer, as_attachment=True, download_name=download_name, mimetype='application/zip')
 
     
 
@@ -229,4 +204,5 @@ def upload_graphs():
     return render_template("download.html", name="output.zip") 
   
 if __name__ == '__main__':   
-    app.run(debug=True)
+    # app.run(debug=True)
+    app.run(host='192.168.0.202', port=8080, debug=True)

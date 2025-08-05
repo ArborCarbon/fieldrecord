@@ -56,7 +56,7 @@ ABIOTIC_MAP = {
 SEVERITY_MAP = {
     'Trace': 'Trace',
     'Low': 'Low',
-    'Med': 'Moderate',
+    'Moderate': 'Moderate',
     'High': 'High',
     'Severe': 'Severe',
 

@@ -34,32 +34,30 @@
 					<label for="plantations-layer">Filename for: Plantation Layer<span style="color: red;">*</span></label>
 					<input type="text" class="form-control" id="plantations-layer" name="plantations-layer" placeholder="layer.shp" required aria-required="true"> 
 
-					<label for="observation-polygons">Filename for: Observation Polygons<span style="color: red;">*</span></label>
-					<input type="text" class="form-control" id="observation-polygons" name="observation-polygons" placeholder="area.shp" required aria-required="true"> 
+					<label for="polygons-points-layer">Filename for: Observation Polygons/Points<span style="color: red;">*</span></label>
+					<input type="text" class="form-control" id="polygons-points-layer" name="polygons-points-layer" placeholder="Gippsland-2025-04-11T05_05_34.621Z.geojson" required aria-required="true"> 
 
-					<label for="observation-points">Filename for: Observation Points<span style="color: red;">*</span></label>
-					<input type="text" class="form-control" id="observation-points" name="observation-points" placeholder="points.shp" required aria-required="true"> 
-					
 					<label for="abiotic_map">Abiotic map: dictionary mapping short names to full names for abiotic factors</label>
 					<textarea class="form-control" id="abiotic_map" name="abiotic_map" rows="14">{
 	"Lning": "Lightning",
 	"Weed": "Weed",
 	"Storm": "Storm",
 	"FolDis": "FoliageDiscolouration",
-	"ANB": "ANB",
-	"Herb": "Herb",
-	"Miss": "Stocking",
-	"miss": "Stocking",
+	"ANB": "Animal",
+	"AN": "Animal",
+	"Herb": "Herbicide",
+	"Miss": "StockingIssues",
+	"miss": "StockingIssues",
 	"Fire": "Fire",
-	"WL": "WL",
-	"DRT": "DRT",
+	"WL": "Waterlogging",
+	"DRT": "Drought",
 	"MY": "MY"
 }</textarea>
 					<label for="severity_map">Severity map: dictionary mapping short names to full names for pest impact levels</label>
 					<textarea class="form-control " id="severity_map" name="severity_map" rows="7">{
 	"Trace": "Trace",
 	"Low": "Low",
-	"Med": "Moderate",
+	"Moderate": "Moderate",
 	"High": "High",
 	"Severe": "Severe"
 }</textarea>
@@ -77,13 +75,13 @@
 	"Severe": 9
 }</textarea>
 					<label for="pests">Pest detection types</label>
-					<textarea class="form-control" id="pests" name="pests" rows=1>["CNC", "DNB", "DIP", "IPS", "MPA", "PC", "SN", "MLS", "ALS", "DB", "LRP", "AGM", "URBA", "CupM", "SHM", "LeafB"]</textarea>
+					<textarea class="form-control" id="pests" name="pests" rows=1>["CNC", "DNB", "DIP", "IPS", "MPA", "PC", "SN", "MLS", "ALS", "DB", "LRP", "AGM", "URBA", "CupM", "SHM", "LeafB", "PAM", "PB", "SLB"]</textarea>
 					<label for="columns">Columns to process</label>
 					<textarea class="form-control" id="columns" name="columns" rows="6">{
-	"Sirex2024": "SN",
-	"Dothi2024": "DB",
-	"Abiotic2024": "ABIOTIC_MAP",
-	"PestD_2024": "PEST_MAP"
+	"Sirex2025": "SN",
+	"Dothi2025": "DNB",
+	"Abiotic2025": "ABIOTIC_MAP",
+	"PestD_2025": "PEST_MAP"
 }</textarea>
 					<input type="submit" value="Upload" class="btn btn-primary"> 
 				</form> 

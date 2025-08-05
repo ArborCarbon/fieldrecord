@@ -43,7 +43,7 @@ def run_graphs_and_plots(out_dir, region_col, district_col, code_col, area_col, 
             
             parts = code.split('_')
 
-            pests = [part for part in parts if part not in severity_map]
+            pests = [part for part in parts if part not in severity_map and part != "" and part is not None]
             pests = pests if pests else [None]
 
             if severity is None:

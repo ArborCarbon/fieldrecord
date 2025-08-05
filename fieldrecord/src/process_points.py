@@ -1,6 +1,7 @@
 import geopandas as gpd
 import pandas as pd
 from shapely.prepared import prep
+import numpy as np
 
 
 def intersect_point_data_with_plantations(point_obs, plantations):    
@@ -28,7 +29,6 @@ def intersect_point_data_with_plantations(point_obs, plantations):
     return point_obs
 
 
-
 def join_point_data_to_polygons(
     point_obs: gpd.GeoDataFrame,
     polygon_obs: gpd.GeoDataFrame,
@@ -50,9 +50,15 @@ def join_point_data_to_polygons(
     polygons_with_CODE = polygon_obs.loc[~polygon_obs['CODE'].isna()]
     polygons_without_CODE = polygon_obs.loc[polygon_obs['CODE'].isna()]
 
-    prepared_polygon = prep(polygons_with_CODE.geometry.buffer(0).unary_union)
-    hit_index = point_obs["geometry"].apply(lambda x: prepared_polygon.intersects(x))
-    point_obs = point_obs[~hit_index]
+    prepared_polygon = prep(polygons_with_CODE.geometry.buffer(0).unary_union) # check this out 
+
+    # Use np.asarray to ensure copying when necessary
+    point_geom_array = np.asarray(point_obs["geometry"])
+    hit_index = np.array([prepared_polygon.intersects(geom) for geom in point_geom_array])
+    
+    # hit_index = point_obs["geometry"].apply(lambda x: prepared_polygon.intersects(x))
+
+    # point_obs = point_obs[~hit_index] # NOTE 
 
     # Reset the index of the polygon_obs 
     polygon_obs = polygon_obs.reset_index()
@@ -65,4 +71,3 @@ def join_point_data_to_polygons(
     joined_gdf.rename(columns={'CODE_left': 'CODE'}, inplace=True)
 
     return joined_gdf
-

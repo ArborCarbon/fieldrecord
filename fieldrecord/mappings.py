@@ -19,10 +19,11 @@ ABIOTIC_MAP = {
 SEVERITY_MAP = {
     'Trace': 'Trace',
     'Low': 'Low',
-    'Med': 'Moderate',
+    'Moderate': 'Moderate',
     'High': 'High',
     'Severe': 'Severe',
 }
+
 SEVERITY_RANK = {   
     'Trace': 0,
     'Trace-Low': 1,
@@ -34,6 +35,7 @@ SEVERITY_RANK = {
     'High-Severe': 7,
     'Severe': 8, 
     }
+
 # 2024
 SEVERITY_RANK = {   
     'Trace': 0,
@@ -52,6 +54,7 @@ SEVERITY_RANK = {
 pests = [
     'CNC', 'DNB', 'DIP', 'IPS', 'MPA', 'PC', 'SN', 'MLS', 
     'ALS', 'DB', 'LRP', 'AGM', 'URBA', 'CupM', 'SHM', 'LeafB',
+    'EPB', 'EAGM', 'EMLS', 'ESHM' # euc pests, added 17/7/25
 ]
 
 # Dictionary mapping short names to themselves for pest detection types
@@ -60,5 +63,14 @@ PEST_MAP = {x: x for x in pests}
 
 # List of column names to be processed
 # columns_to_process = {'Sirex2023': 'SN', 'Dothi2023': 'DB', 'Abiotic2023': ABIOTIC_MAP, 'PestD_2023': PEST_MAP}
-columns_to_process = {'Sirex2024': 'SN', 'Dothi2024': 'DB', 'Abiotic2024': ABIOTIC_MAP, 'PestD_2024': PEST_MAP}
+columns_to_process = {
+    'Sirex2025': 'SN', 
+    'Dothi2025': 'DB', 
+    'Aphid2025': 'MPA',
+    'Dip2025': 'DIP',
+    'CNC2025': 'CNC',
+    'IPS2025': 'IPS', 
+    'Abiotic2025': ABIOTIC_MAP, 
+    'PestD_2025': PEST_MAP
+}
 
