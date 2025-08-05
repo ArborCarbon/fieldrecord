@@ -34,6 +34,10 @@ def save_updated_crs_files(plantations, point_obs, polygon_obs, out_dir):
     polygon_obs.to_file(out_dir / 'polygon_obs.gpkg')
     plantations.to_file(out_dir / 'plantations.gpkg')
 
+def prepare_plantations(plantations):
+    if 'GlobalID' not in plantations.columns:
+        plantations['GlobalID'] = plantations.index
+    return plantations
 
 def remove_nulls(df):
     nulls = df[df['CODE'].isna()]
