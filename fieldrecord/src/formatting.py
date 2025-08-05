@@ -133,10 +133,25 @@ def put_codes_in_columns(df, columns_to_process, ABIOTIC_MAP, PEST_MAP, SEVERITY
     return df
      
 def merge_duplicates(df, severity_rank):
-    # df_sorted = df.sort_values('GlobalID') 
-    # df_sorted=df[(df['GlobalID']=='{4354F319-6ABA-41ED-A911-9DC6A333B984}') | (df['GlobalID']=='{DF1E2C43-255E-4F05-ADAB-0AEC76C54F95}')]
-    grouped = df.groupby('GlobalID')
+    """
+    This function takes a DataFrame and a severity rank dictionary and merges the 
+    records with the same GlobalID, keeping the highest severity value in cases of 
+    duplicate keys in the CODE_dict. It also removes the duplicates from the DataFrame.
 
+    Parameters
+    ----------
+    df : pandas DataFrame
+        The DataFrame with the data to be merged. 
+    severity_rank : dict
+        A dictionary where the keys are the different severity codes and the values
+        are their corresponding ranks.
+
+    Returns
+    -------
+    pandas DataFrame
+        The DataFrame with the duplicates removed and the CODE_dict merged. 
+    """
+    grouped = df.groupby('GlobalID') # this should be a unique ID for the plantations gdf. Maybe force it by adding manually earlier in the process?
     to_remove=[]
 
     for global_id, group in grouped: 
@@ -170,8 +185,6 @@ def merge_duplicates(df, severity_rank):
     df_final.reset_index(drop=True, inplace=True)
     return(df_final)
 
-
-        
 # def sort_output_columns(df, input_cols, columns_to_process):
 #     cols_to_keep =  input_cols + list(columns_to_process.keys()) + ['CODE', 'p_area','Severity','obs_idx' ]
 #     df = df[cols_to_keep]

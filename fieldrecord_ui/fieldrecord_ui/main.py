@@ -29,7 +29,6 @@ def reset_output_folder():
     # Recreate the OUTPUT_FOLDER directory
     os.makedirs(app.config['OUTPUT_FOLDER'])
 
-
 def delete_output_folder():
     time.sleep(120)  # Wait for 2 minutes before deleting the folder
 

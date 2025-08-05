@@ -1,3 +1,4 @@
+import datetime 
 
 # Dictionary mapping short names to full names for abiotic factors
 ABIOTIC_MAP = {
@@ -24,19 +25,7 @@ SEVERITY_MAP = {
     'Severe': 'Severe',
 }
 
-SEVERITY_RANK = {   
-    'Trace': 0,
-    'Trace-Low': 1,
-    'Low': 2,
-    'Low-Moderate': 3,
-    'Moderate': 4,
-    'Moderate-High': 5,
-    'High': 6,
-    'High-Severe': 7,
-    'Severe': 8, 
-    }
-
-# 2024
+# Updated for the 2024-2025 season, to include more severities
 SEVERITY_RANK = {   
     'Trace': 0,
     'Trace-Low': 1,
@@ -51,26 +40,32 @@ SEVERITY_RANK = {
     }
 
 # List of short names for pest detection types
+# This list should contain all pests that are noted in the Sketch Mapping, 
+# as anything not included here will be filtered out
 pests = [
     'CNC', 'DNB', 'DIP', 'IPS', 'MPA', 'PC', 'SN', 'MLS', 
     'ALS', 'DB', 'LRP', 'AGM', 'URBA', 'CupM', 'SHM', 'LeafB',
-    'EPB', 'EAGM', 'EMLS', 'ESHM' # euc pests, added 17/7/25
+    'EPB', 'EAGM', 'EMLS', 'ESHM' # euc pests, added 17/07/25
 ]
 
 # Dictionary mapping short names to themselves for pest detection types
 # This is done to create a consistent format for all dictionaries
 PEST_MAP = {x: x for x in pests}
 
-# List of column names to be processed
-# columns_to_process = {'Sirex2023': 'SN', 'Dothi2023': 'DB', 'Abiotic2023': ABIOTIC_MAP, 'PestD_2023': PEST_MAP}
+year = datetime.datetime.now().year
+
+# List of column names to be processed, all pests included in this list 
+# will still be included in the overall pest column, but the specific 
+# severity for that pest will be included in these columns too, makes it 
+# easier to do analysis later 
 columns_to_process = {
-    'Sirex2025': 'SN', 
-    'Dothi2025': 'DB', 
-    'Aphid2025': 'MPA',
-    'Dip2025': 'DIP',
-    'CNC2025': 'CNC',
-    'IPS2025': 'IPS', 
-    'Abiotic2025': ABIOTIC_MAP, 
-    'PestD_2025': PEST_MAP
+    f'Sirex{year}': 'SN', 
+    f'Dothi{year}': 'DB', 
+    f'Aphid{year}': 'MPA',
+    f'Dip{year}': 'DIP',
+    f'CNC{year}': 'CNC',
+    f'IPS{year}': 'IPS', 
+    f'Abiotic{year}': ABIOTIC_MAP, 
+    f'PestD_{year}': PEST_MAP,
 }
 

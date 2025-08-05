@@ -50,15 +50,15 @@ def add_nulls(df, nulls):
         df[col] = None if df[col].isna().all() else df[col]
     return df
 
-def generate_summary(df, out_dir):
+def generate_summary(df, out_dir, region_col="Region", district_col="DistrictName", area_m_col="SHAPE_Area"):
     # for each region - total sirex, mpa, cnc, dip, ips, anb, dnb (but check)
     # for each region euc only - but shouldn't have to check - 'EPB', 'EMLS'
     # for each region total area affected & total area not affected
     with open(out_dir / "summary.txt", "w") as f:
         f.write("-------- REGION SUMMARY --------\n")
-        df['area_hec'] = df['SHAPE_Area'] / 10000
-        for region in df['Region'].unique():
-            s = df[df['Region'] == region]
+        df['area_hec'] = df[area_m_col] / 10000
+        for region in df[region_col].unique():
+            s = df[df[region_col] == region]
             s_null = s[s['CODE'].isna()]
             s_valid = s[s['CODE'].notna()]
             f.write(f"{region}:\n")
@@ -72,8 +72,8 @@ def generate_summary(df, out_dir):
             f.write("\n")
 
         f.write("-------- DISTRICT SUMMARY --------\n")
-        for district in df['DistrictName'].unique():
-            s = df[df['DistrictName'] == district]
+        for district in df[district_col].unique():
+            s = df[df[district_col] == district]
             s_null = s[s['CODE'].isna()]
             s_valid = s[s['CODE'].notna()]
             f.write(f"{district}:\n")
@@ -85,7 +85,6 @@ def generate_summary(df, out_dir):
                 s_pest = s_valid[s_valid['CODE'].str.contains(pest, na=False)]
                 f.write(f"\t\t{pest} {s_pest['area_hec'].sum()} hectares\n")
             f.write("\n")
-
 
 # Function to get the current timestamp
 def timestamp():
