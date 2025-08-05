@@ -3,7 +3,7 @@ import pandas as pd
 
 # ---------- Decode CODE Column
 # -------------------------------
-def decode(gdf, SEVERITY_MAP: dict, code_column='CODE', empty_value='None'):
+def decode(gdf, SEVERITY_MAP: dict, abiotic_map: dict, code_column='CODE', empty_value='Trace'):
     """
     Decodes the CODE column of a GeoDataFrame based on the provided mapping dictionaries, and updates the specified columns
     with the decoded values.
@@ -26,10 +26,13 @@ def decode(gdf, SEVERITY_MAP: dict, code_column='CODE', empty_value='None'):
     gdf['CODE'] = gdf['CODE'].str.strip()
 
 
-    def get_maps(x, severity_map, code_column, empty_value='None'):
+    def get_maps(x, severity_map, code_column, empty_value='Trace'):
         code = x[code_column]
-        split = code.split('_')[:-1]
+        split = code.split('_')
+        if split[-1] == '':
+            split = split[:-1]
         decode = build_decode_list(code, split, severity_map)
+        # print(split, decode)
         result = process_decode(decode, split, empty_value)
         return result        
 
@@ -39,36 +42,55 @@ def decode(gdf, SEVERITY_MAP: dict, code_column='CODE', empty_value='None'):
         return decode
 
 
-    def process_decode(decode, split, empty_value='None'):
+    def process_decode(decode, split, empty_value='Trace'):
         result = {}
         keys = []
         severity_values = []
 
+        # for d, s in zip(decode, split):
+        #     if d == 'other':
+        #         # if severity_values:
+        #         #     for key in keys:
+        #         #         result[key] = severity_values
+        #         #     keys = []
+        #         #     severity_values = []
+        #         keys.append(s)
+        #     elif d == 'severity':
+        #         severity_values.append(s)
         for d, s in zip(decode, split):
             if d == 'other':
-                if severity_values:
-                    for key in keys:
-                        result[key] = severity_values
-                    keys = []
-                    severity_values = []
                 keys.append(s)
             elif d == 'severity':
                 severity_values.append(s)
 
         # Assign the remaining severity values to the keys
+        # if severity_values:
+        #     if not keys:
+        #         result['no-severity'] = severity_values
+        #     for key in keys:
+        #         result[key] = severity_values
+        # else:
+        #     for key in keys:
+        #         result[key] = [empty_value]
+        # return result
+        
+
         if severity_values:
-            if not keys:
-                result['no-severity'] = severity_values
             for key in keys:
-                result[key] = severity_values
+                result[key] = severity_values  
         else:
             for key in keys:
-                result[key] = [empty_value]
+                if key == 'SN':
+                    result[key] = ['Low'] # empty sirex is low, not trace
+                elif key in abiotic_map.keys():
+                    result[key] = [None] # empty abiotic is None, not trace 
+                else:
+                    result[key] = [empty_value] # empty anything else is trace
         return result
 
 
 
-    def apply_maps(gdf, _map, code_column, empty_value='None'):
+    def apply_maps(gdf, _map, code_column, empty_value='Trace'):
         gdf['CODE_dict'] = gdf.apply(lambda x: get_maps(x, _map, code_column, empty_value), axis=1)
         return gdf
 

@@ -22,7 +22,6 @@ point_path = Path('/Users/harryeslick/ArborCarbon Dropbox/Consulting/ACTForests/
 # Set crs, and read data from files
 crs = 4326
 
-
 # --- Outputs
 # Create output directory if it does not exist
 save_suffix = timestamp()
@@ -57,7 +56,7 @@ ABIOTIC_MAP = {
 SEVERITY_MAP = {
     'Trace': 'Trace',
     'Low': 'Low',
-    'Med': 'Moderate',
+    'Moderate': 'Moderate',
     'High': 'High',
     'Severe': 'Severe',
 
