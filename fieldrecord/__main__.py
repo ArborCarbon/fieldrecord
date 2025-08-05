@@ -4,10 +4,10 @@ import logging
 import os
 from pathlib import Path
 import shutil
-
 import geopandas as gpd
 import pandas as pd
-from pathlib import Path
+import typer
+from rich.logging import RichHandler
 
 from fieldrecord.src.decode import decode
 from fieldrecord.src.formatting import format_codes, put_codes_in_columns, merge_duplicates, sort_output_columns
@@ -15,9 +15,6 @@ from fieldrecord.src.process_points import intersect_point_data_with_plantations
 from fieldrecord.src.process_polygons import intersect_polygon_data_with_plantations, clean_polygons
 from fieldrecord.src.utils import read_files, set_crs, save_updated_crs_files, prepare_plantations, remove_nulls, add_nulls, timestamp, generate_summary
 from fieldrecord.mappings import ABIOTIC_MAP, PEST_MAP, SEVERITY_MAP, SEVERITY_RANK, pests, columns_to_process
-
-import typer
-from rich.logging import RichHandler
 
 FORMAT = "%(message)s"
 logging.basicConfig(
@@ -44,7 +41,6 @@ def run_field_record(
                     district_col="DistrictName",
                     area_m_col="SHAPE_Area",
                     ):
-    
     """
     Main function for running the FieldRecord program.
 
@@ -80,10 +76,6 @@ def run_field_record(
         The column name for the district in the plantations file for the summary. Defaults to 'DistrictName, which is true for HVP'.
     area_m_col : str, optional
         The column name for the area in square meters in the plantations file for the summary. Defaults to 'SHAPE_Area, which is true for HVP'.
-
-    Returns
-    -------
-    None
     """
     save_suffix = timestamp()
     out_dir = Path(out_dir)
