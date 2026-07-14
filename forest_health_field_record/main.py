@@ -9,12 +9,12 @@ import pandas as pd
 import typer
 from rich.logging import RichHandler
 
-from fieldrecord.src.decode import decode
-from fieldrecord.src.formatting import format_codes, put_codes_in_columns, merge_duplicates, sort_output_columns
-from fieldrecord.src.process_points import intersect_point_data_with_plantations, join_point_data_to_polygons
-from fieldrecord.src.process_polygons import intersect_polygon_data_with_plantations, clean_polygons
-from fieldrecord.src.utils import read_files, set_crs, save_updated_crs_files, prepare_plantations, remove_nulls, add_nulls, timestamp, generate_summary
-from fieldrecord.mappings import ABIOTIC_MAP, PEST_MAP, SEVERITY_MAP, SEVERITY_RANK, pests, columns_to_process
+from forest_health_field_record.src.decode import decode
+from forest_health_field_record.src.formatting import format_codes, put_codes_in_columns, merge_duplicates, sort_output_columns
+from forest_health_field_record.src.process_points import intersect_point_data_with_plantations, join_point_data_to_polygons
+from forest_health_field_record.src.process_polygons import intersect_polygon_data_with_plantations, clean_polygons
+from forest_health_field_record.src.utils import read_files, set_crs, save_updated_crs_files, prepare_plantations, remove_nulls, add_nulls, timestamp, at_risk_sirex, generate_summary
+from forest_health_field_record.mappings import ABIOTIC_MAP, PEST_MAP, SEVERITY_MAP, SEVERITY_RANK, pests, columns_to_process
 
 FORMAT = "%(message)s"
 logging.basicConfig(
@@ -37,9 +37,10 @@ def run_field_record(
                     severity_rank:list[str] = SEVERITY_RANK,
                     columns_to_process:dict[str, any] = columns_to_process,
                     summary=True,
-                    region_col="Region",
+                    region_col="Region", # if pass none for this and district, will give overall summary instead 
                     district_col="DistrictName",
-                    area_m_col="SHAPE_Area",
+                    area_hec_col="Area_hec", # make sure this is in hectares
+                    sirex=True
                     ):
     """
     Main function for running the FieldRecord program.
@@ -138,9 +139,14 @@ def run_field_record(
     # add back in nulls
     df = add_nulls(df, nulls) 
 
+    # adds 'At Risk' classification for anything within 10km of Sirex.
+    # applied to nulls as well so comes after they are added back in 
+    if sirex:
+        df = at_risk_sirex(df)
+
     if summary:
         # the cols should be from the Plantation df, specifying region, district, and area in m for each plantation polygon
-        generate_summary(df, out_dir, region_col=region_col, district_col=district_col, area_m_col=area_m_col)
+        generate_summary(df, out_dir, region_col=region_col, district_col=district_col, area_hec_col=area_hec_col)
     
     # Sort output dataframe columns to include only important columns 
     df = sort_output_columns(df, input_cols, columns_to_process)
@@ -156,8 +162,8 @@ def run_field_record(
     df.to_file(shp_path)
     
     # Save as excel
-    excel_path = (out_dir / output_filename).with_suffix(".xlsx")
-    df.to_excel(excel_path)
+    # excel_path = (out_dir / output_filename).with_suffix(".xlsx")
+    # df.to_excel(excel_path)
 
 if __name__ == "__main__":
     app()

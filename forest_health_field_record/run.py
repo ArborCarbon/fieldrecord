@@ -1,6 +1,6 @@
-from fieldrecord.main import run_field_record
+from forest_health_field_record.main import run_field_record
 from pathlib import Path 
-from fieldrecord.mappings import ABIOTIC_MAP, PEST_MAP, SEVERITY_MAP, SEVERITY_RANK, pests, columns_to_process
+from forest_health_field_record.mappings import ABIOTIC_MAP, PEST_MAP, SEVERITY_MAP, SEVERITY_RANK, pests, columns_to_process
 import geopandas as gpd 
 import fiona
 import pandas as pd
@@ -201,3 +201,41 @@ run_field_record(plantation_path=str(plantation_path),
                 severity_rank=SEVERITY_RANK, 
                 columns_to_process=columns_to_process,
                 summary=True)
+
+
+
+# ------------------------------ run 26/09/2025 ------------------------------ #
+pp = Path('/home/arborcarbon/BigFella/Development/IR/fieldrecord_stuff/20-11-2025/')
+
+gdf1 = gpd.read_file(pp / 'ACT-2025-11-20T03_07_34.072Z.geojson')
+gdf2 = gpd.read_file(pp / 'gps-serial-trail-ACT-2025-11-20T03-07-38-134Z.geojson')
+gdf = pd.concat([gdf1, gdf2]).reset_index(drop=True)
+gdf.rename(columns={'classification':'CODE'}, inplace=True)
+gdf.to_file(pp / 'combined.geojson')
+
+p = gpd.read_file(pp / 'ACTForestHealthLayer25/ACTForestHealthLayer25.gdb', layer=0)
+p.to_file(pp / "ACT_Plantation.gpkg")
+
+manual_path = str(pp / 'combined.geojson')
+plantation_path = str(pp / 'ACT_Plantation.gpkg')
+out_dir = pp / 'ACT_output_20-11-2025/'
+out_dir.mkdir(exist_ok=True, parents=True)
+
+man=gpd.read_file(manual_path)
+# replace all rows with code Low_Trace_DNB with Trace_DNB
+# man.loc[man['CODE'] == 'Low_Trace_DNB', 'CODE'] = 'Trace_DNB'
+
+run_field_record(plantation_path=str(plantation_path), 
+                manual_path=str(manual_path), 
+                out_dir=str(out_dir), 
+                abiotic_map=ABIOTIC_MAP, 
+                pest_map=PEST_MAP, 
+                severity_map=SEVERITY_MAP, 
+                severity_rank=SEVERITY_RANK, 
+                columns_to_process=columns_to_process,
+                region_col=None,
+                district_col=None,
+                area_hec_col="Shape_Area",
+                summary=True)
+
+

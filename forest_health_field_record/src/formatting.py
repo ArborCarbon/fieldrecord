@@ -118,12 +118,12 @@ def put_codes_in_columns(df, columns_to_process, ABIOTIC_MAP, PEST_MAP, SEVERITY
         return df
 
     for col, code in columns_to_process.items():
-        if col not in ["Abiotic2025", "PestD_2025"]:
-            df = apply_main_pests(df, col, code)
-        elif col == "Abiotic2025":
+        if col.startswith("Abiotic"):
             df = apply_other_pests(df, col, ABIOTIC_MAP, SEVERITY_RANK)
-        elif col == "PestD_2025":
+        elif col.startswith("PestD_"):
             df = apply_other_pests(df, col, PEST_MAP, SEVERITY_RANK)
+        else:
+            df = apply_main_pests(df, col, code)
         
     if 'Severity' not in df.columns:
         df['Severity'] = None # ir
