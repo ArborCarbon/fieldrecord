@@ -60,7 +60,7 @@ year = datetime.datetime.now().year
 # easier to do analysis later 
 columns_to_process = {
     f'Sirex{year}': 'SN', 
-    f'Dothi{year}': 'DB', 
+    f'Dothi{year}': 'DNB', 
     f'Aphid{year}': 'MPA',
     f'Dip{year}': 'DIP',
     f'CNC{year}': 'CNC',
